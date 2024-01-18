@@ -1,31 +1,32 @@
 
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0 auto;
-}
-
-#cabinet-background {
-  width: 100%;
-  height: 100%;
   background: #1c1c1c66;
   overflow: hidden;
 }
 
-#cabinet-holder {
-  width: 900px;
-  height: 100%;
-  margin: 0 auto;
+.cabinets {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  padding-top: 24vh;
 }
 
-#cabinet {
-  width: 100%;
-  position: relative;
-  top: 50%;
-  transform: translateY(calc((-84px - 680px) / 2));
+/* TODO: thinner, along with everything else, like 400px */
+/* thing enough that a row of 5 of them will fit (with edges cut off) on a 1200px screen */
+.cabinet-holder {
+  margin: 0 14px;
+  flex: none;
 }
 
-#logo-holder {
+.cabinet {
+  width: 420px;
+}
+
+.logo-holder {
   width: 100%;
   height: 84px;
   border-top: 8px solid #090615;
@@ -57,7 +58,7 @@ html, body {
   );
 }
 
-#logo-holder::before {
+.logo-holder::before {
   content: '';
   position: absolute;
   width: 8px;
@@ -67,7 +68,7 @@ html, body {
   background: #000;
 }
 
-#logo-holder::after {
+.logo-holder::after {
   content: '';
   position: absolute;
   width: 8px;
@@ -77,16 +78,16 @@ html, body {
   background: #000;
 }
 
-#logo {
+.logo {
   height: 100%;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
 }
 
-#screen-holder {
+.screen-holder {
   width: calc(100% - 52px);
-  height: 680px;
+  height: 360px;
   margin: 0 auto;
   background: #080123;
   border-right: 8px solid #000;
@@ -95,9 +96,9 @@ html, body {
   margin-bottom: -1px;
 }
 
-#screen {
-  width: 720px;
-  height: 580px;
+.screen {
+  width: calc(100% - 40px);
+  height: calc(100% - 80px);
   background: #bae4ee;
   position: relative;
   top: 40px;
@@ -108,28 +109,29 @@ html, body {
   box-shadow: 0px 0px 80px #0effff5e;
 }
 
-#screen-shine {
+.screen-shine {
+  /* TODO: this needs a flicker effect */
   width: 180%;
   height: 180%;
   clip-path: ellipse(50% 40% at 50% 50%);
   background: #fff1;
 }
 
-#button-row-holder {
+.button-row-holder {
   width: 100%;
   height: 84px;
   margin-bottom: -1px;
   position: relative;
 }
 
-#button-row-edge {
+.button-row-edge {
   width: 100%;
   height: 100%;
   clip-path: polygon(18px 0%, calc(100% - 18px) 0, 100% 100%, 0% 100%);
   background: #000;
 }
 
-#button-row-face {
+.button-row-face {
   width: calc(100% - 16px);
   height: calc(100% - 16px);
   transform: translate(8px, 8px);
@@ -165,7 +167,7 @@ html, body {
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#05a389", endColorstr="#05a389", GradientType=1 ); */
 }
 
-#legs {
+.legs {
   width: calc(100% - 16px);
   height: 50%;
   border-right: 8px solid #000;
@@ -185,13 +187,13 @@ html, body {
 
 .joystick {
   position: absolute;
-  top: -40px;
-  left: 17%;
-  width: 42px;
+  top: -28px;
+  left: 22%;
   border-radius: 50%;
   border: 8px solid #000;
   z-index: 3;
-  height: 42px;
+  width: 28px;
+  height: 28px;
   background: #b40303;
   transform: translateX(-50%);
 }
@@ -218,24 +220,24 @@ html, body {
 
 .button {
   position: absolute;
-  width: 26px;
+  width: 22px;
   height: 14px;
   border-radius: 100%;
-  border: 8px solid #000;
+  border: 6px solid #000;
   z-index: 1;
   transform: translateX(-50%);
 }
 
 .button.button-1 {
   top: 24%;
-  left: 79%;
+  left: 74%;
   background-color: #b40303;
   /* box-shadow: 2px 1px 0px #b40303; */
 }
 
 .button.button-2 {
   top: 42%;
-  left: 85%;
+  left: 83%;
   background-color: #fff;
   /* box-shadow: 2px 1px 0px #fff; */
 }
