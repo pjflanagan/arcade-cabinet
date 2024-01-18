@@ -9,14 +9,13 @@ html, body {
 
 .cabinets {
   display: flex;
-  height: 100vh;
+  height: 600px;
   width: 100vw;
   justify-content: center;
-  padding-top: 24vh;
+  top: calc(100% - 660px);
+  position: fixed;
 }
 
-/* TODO: thinner, along with everything else, like 400px */
-/* thing enough that a row of 5 of them will fit (with edges cut off) on a 1200px screen */
 .cabinet-holder {
   margin: 0 14px;
   flex: none;
@@ -34,28 +33,6 @@ html, body {
   position: relative;
   z-index: 10;
   box-shadow: 0px 82px 25px #0002;
-  background: linear-gradient(
-    90deg, 
-    #05a389 0%, 
-    #05a389 3%, 
-    #FFF 3%, 
-    #FFF 4%, 
-    #05a389 4%, 
-    #05a389 5%, 
-    #FFF 5%, 
-    #FFF 6%, 
-    #05a389 6%, 
-     /* other side */
-    #05a389 94%, 
-    #FFF 94%, 
-    #FFF 95%, 
-    #05a389 95%, 
-    #05a389 96%, 
-    #FFF 96%, 
-    #FFF 97%, 
-    #05a389 97%, 
-    #05a389 100%
-  );
 }
 
 .logo-holder::before {
@@ -99,7 +76,6 @@ html, body {
 .screen {
   width: calc(100% - 40px);
   height: calc(100% - 80px);
-  background: #bae4ee;
   position: relative;
   top: 40px;
   left: 50%;
@@ -107,10 +83,26 @@ html, body {
   border-radius: 120px 120px 120px 120px/15px 15px 15px 15px;
   overflow: hidden;
   box-shadow: 0px 0px 80px #0effff5e;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+.screen-blue {
+  /* TODO: add a flicker effect */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #bae4ee;
+  opacity: 0.1;
+}
+
+.screen-static {
+  /* TODO: static animation */
+  position: absolute;
 }
 
 .screen-shine {
-  /* TODO: this needs a flicker effect */
+  position: absolute;
   width: 180%;
   height: 180%;
   clip-path: ellipse(50% 40% at 50% 50%);
@@ -136,35 +128,6 @@ html, body {
   height: calc(100% - 16px);
   transform: translate(8px, 8px);
   clip-path: polygon(16px 0%, calc(100% - 16px) 0, 100% 100%, 0% 100%);
-  background: #05a389;
-  background: linear-gradient(
-    90deg, 
-    #05a389 0%, 
-    #05a389 3%, 
-    #FFF 3%, 
-    #FFF 4%, 
-    #05a389 4%, 
-    #05a389 5%, 
-    #FFF 5%, 
-    #FFF 6%, 
-    #05a389 6%, 
-     /* other side */
-    #05a389 94%, 
-    #FFF 94%, 
-    #FFF 95%, 
-    #05a389 95%, 
-    #05a389 96%, 
-    #FFF 96%, 
-    #FFF 97%, 
-    #05a389 97%, 
-    #05a389 100%
-  );
-
-  /* background: -moz-linear-gradient(135deg, #05a389 0%, #05a389 36%, #FFF 37%, #FFF 49%, #05a389 49%, #05a389 63%, #FFF 64%, #FFF 70%, #05a389 70%, #05a389 100%);
-
-  background: -webkit-linear-gradient(135deg, #05a389 0%, #05a389 36%, #FFF 37%, #FFF 49%, #05a389 49%, #05a389 63%, #FFF 64%, #FFF 70%, #05a389 70%, #05a389 100%);
-
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#05a389", endColorstr="#05a389", GradientType=1 ); */
 }
 
 .legs {
@@ -180,8 +143,6 @@ html, body {
     #1c1c1c 100%
   );
 }
-
-
 
 /* joystick */
 
