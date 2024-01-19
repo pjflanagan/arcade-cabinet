@@ -73,6 +73,24 @@ html, body {
   margin-bottom: -1px;
 }
 
+@keyframes flicker {
+  0% {
+    box-shadow: 0px 0px 70px #0effff3e;
+  }
+  30% {
+    box-shadow: 0px 0px 80px #0effff5d;
+  }
+  50% {
+    box-shadow: 0px 0px 70px #0effff41;
+  }
+  80% {
+    box-shadow: 0px 0px 90px #0effff65;
+  }
+  100% {
+    box-shadow: 0px 0px 80px #0effff2e;
+  }
+}
+
 .screen {
   width: calc(100% - 40px);
   height: calc(100% - 80px);
@@ -82,7 +100,9 @@ html, body {
   transform: translateX(-50%);
   border-radius: 120px 120px 120px 120px/15px 15px 15px 15px;
   overflow: hidden;
+  /* TODO: animate the box shadow so that it flickers */
   box-shadow: 0px 0px 80px #0effff5e;
+  animation: flicker 0.7s infinite;
   background-position: center !important;
   background-size: cover !important;
 }
@@ -146,37 +166,64 @@ html, body {
 
 /* joystick */
 
-.joystick {
+@keyframes rotate {
+  0% {
+    transform: translateY(-100%) rotate(2deg);
+  }
+  23% {
+    transform: translateY(-100%) rotate(-3deg);
+  }
+  42% {
+    transform: translateY(-100%) rotate(5deg);
+  }
+  68% {
+    transform: translateY(-100%) rotate(-2deg);
+  }
+  81% {
+    transform: translateY(-100%) rotate(3deg);
+  }
+  92% {
+    transform: translateY(-100%) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(-100%) rotate(2deg);
+  }
+}
+
+.joystick-base {
   position: absolute;
-  top: -28px;
-  left: 22%;
-  border-radius: 50%;
-  border: 8px solid #000;
   z-index: 3;
-  width: 28px;
-  height: 28px;
-  background: #b40303;
-  transform: translateX(-50%);
-}
-
-.joystick .stick {
-  position: absolute;
-  top: 100%;
-  left: calc(50% - 5px);
-  width: 10px;
-  height: 38px;
-  background: #000;
-}
-
-.joystick .stick:before {
-  position: absolute;
-  top: calc(50% + 10px);
-  left: calc(-50% - 5px);
+  top: calc(50% - 4px);
+  left: 16%;
   content: '';
   background: #000;
   width: 30px;
   height: 17px;
   border-radius: 100%;
+}
+
+.joystick-base .stick {
+  position: absolute;
+  top: 4px;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 38px;
+  background: #000;
+  animation: rotate 2s infinite;
+  transform-origin: bottom;
+  transform: translateY(-100%);
+}
+
+.joystick-base .stick:before {
+  content: '';
+  position: absolute;
+  top: -28px;
+  transform: translateX(calc(-50% + 4px));
+  width: 28px;
+  height: 28px;
+  background: #b40303;
+  border-radius: 50%;
+  border: 8px solid #000;
 }
 
 .button {
@@ -189,16 +236,62 @@ html, body {
   transform: translateX(-50%);
 }
 
+@keyframes blink-1 {
+  0% {
+    background-color: #b40303;
+    box-shadow:  0px -4px 24px #b4030344;
+  }
+  30% {
+    background-color: #d71414;
+    box-shadow:  0px -4px 24px #d7141444;
+  }
+  50% {
+    background-color: #8d0303;
+    box-shadow: 0px -4px 24px #8d030344;
+  }
+  80% {
+    background-color: #e30d0d;
+    box-shadow: 0px -4px 24px #e30d0d44;
+  }
+  100% {
+    background-color: #b40303;
+    box-shadow: 0px -4px 24px #b4030344;
+  }
+}
+
 .button.button-1 {
   top: 24%;
   left: 74%;
-  background-color: #b40303;
-  /* box-shadow: 2px 1px 0px #b40303; */
+  animation: blink-1 0.62s infinite;
+  background-color: #e30d0d;
+}
+
+@keyframes blink-2 {
+  0% {
+    background-color: #0f8fe5;
+    box-shadow:  0px -4px 24px #0f8fe544;
+  }
+  30% {
+    background-color: #0969a9;
+    box-shadow:  0px -4px 24px #0969a944;
+  }
+  50% {
+    background-color: #39a7f0;
+    box-shadow: 0px -4px 24px #39a7f044;
+  }
+  80% {
+    background-color: #0879c4;
+    box-shadow: 0px -4px 24px #0879c444;
+  }
+  100% {
+    background-color: #56b7f7;
+    box-shadow: 0px -4px 24px #56b7f744;
+  }
 }
 
 .button.button-2 {
   top: 42%;
   left: 83%;
-  background-color: #fff;
-  /* box-shadow: 2px 1px 0px #fff; */
+  background-color: #0f8fe5;
+  animation: blink-2 0.65s infinite;
 }
