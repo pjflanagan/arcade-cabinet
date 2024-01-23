@@ -94,23 +94,41 @@ class Cabinet {
     this.name = name;
     this.library = [...gifLibrary];
     this.pallet = pallet;
-    // this.animationOffsets = generateRandomAnimationOffsets;
   }
 
   // renders the cabinet on an element
   // starts the gif timeout
   render(element) {
     this.element = element;
-    console.log(this.element);
+    
+    this.element.find('.logo-holder').css({
+      background: this.pallet[0]
+    });
+    this.element.find('.button-row-face').css({
+      background: this.pallet[0]
+    });
+    this.element.find('.button-1 .button-color').css({
+      background: this.pallet[1]
+    });
+    this.element.find('.button-2 .button-color').css({
+      background: this.pallet[1]
+    });
+    this.element.find('.ball').css({
+      background: this.pallet[1]
+    });
+    this.element.find('.logo').text(this.name);
+
+    // TODO: generate random animation offsets and cabinet sizings
+
     this.screen = this.element.find('.screen');
     this.setGifOnScreen(this.getRandomGifUrl());
   }
-
   
   destroy() {
     // clear the timeout
     clearTimeout(this.timeout);
     // remove from the screen
+    $(this.element).remove();
   }
   
   // gif cycler
@@ -120,7 +138,7 @@ class Cabinet {
       background: `url(${gifUrl})`
     });
     this.timeout = setTimeout(() => {
-      const newGifUrl = CABINETS[0].exchangeForRandomGifUrl(gifUrl);
+      const newGifUrl = this.exchangeForRandomGifUrl(gifUrl);
       this.setGifOnScreen(newGifUrl);
     }, Math.random() * 3000 + 1800);
   }
@@ -160,7 +178,9 @@ const gifLibrary = new Cabinet('all', [
 ]);
 
 const CABINETS = [
-  new Cabinet('Cyberpunk 2077', GIF_URL_LIBRARIES.cyberpunk, ['#f7ec13', '#56beca'])
+  new Cabinet('Cyberpunk 2077', GIF_URL_LIBRARIES.cyberpunk, ['#f7ec13', '#56beca']),
+  new Cabinet('Horizon', GIF_URL_LIBRARIES.horizon, ['#55aee4', '#7d1e13']),
+  new Cabinet('Spider-Man', GIF_URL_LIBRARIES.spiderMan, ['#ce1612', '#fff'])
 ];
 
 // ----------------------------------------------------------------
@@ -168,8 +188,21 @@ const CABINETS = [
 // ----------------------------------------------------------------
 
 (function() {
-  CABINETS[0].render($('#first-cabinet'));
+  const originalCabinet = $('.cabinet-holder');
+  originalCabinet.remove();
+
+  const newCabinet = originalCabinet.clone();
+  CABINETS[0].render(newCabinet);
+  $('.cabinets').append(newCabinet);
+
   // TODO: use this to add a new cabinet, at the start, add 7 cabinets that'll get scrolled
-  $('.cabinets').append($('#first-cabinet').clone());
+  const newCabinet2 = originalCabinet.clone();
+  CABINETS[1].render(newCabinet2);
+  $('.cabinets').append(newCabinet2);
+
+  const newCabinet3 = originalCabinet.clone();
+  CABINETS[2].render(newCabinet3);
+  $('.cabinets').append(newCabinet3);
+  // CABINETS[0].destroy();
 })();
 
