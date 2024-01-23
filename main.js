@@ -1,6 +1,8 @@
 
-// TODO: eventually I will make a cabinet for each game series that I like
-// Then I will cycle through each cabinet one by one
+// ----------------------------------------------------------------
+//  Gif Library
+// ----------------------------------------------------------------
+
 const GIF_URL_LIBRARIES = {
   snesMario: [
     'https://media.giphy.com/media/XIhPIFwsPxljcGRC5d/giphy.gif',
@@ -74,15 +76,20 @@ const GIF_URL_LIBRARIES = {
   // GTAV
   // Super Smash Bros
   // Tony Hawk's Underground
-  // SSX 3
-  // Burnout revenge
+  // SSX 3 and On Tour
+  // Burnout Revenge
   // Kirby's Avalanche
 };
+
+// ----------------------------------------------------------------
+//  Cabinet Class
+// ----------------------------------------------------------------
 
 // All of these GifLibraries will instead be cabinets with Game titles
 // and a list of Gifs
 // and a color pallette for the cabinet
 class Cabinet {
+  // string, Url[], Color[]
   constructor(name, gifLibrary, pallet) {
     this.name = name;
     this.library = [...gifLibrary];
@@ -90,10 +97,35 @@ class Cabinet {
     // this.animationOffsets = generateRandomAnimationOffsets;
   }
 
-  // applyToElement() {
+  // renders the cabinet on an element
+  // starts the gif timeout
+  render(element) {
+    this.element = element;
+    console.log(this.element);
+    this.screen = this.element.find('.screen');
+    this.setGifOnScreen(this.getRandomGifUrl());
+  }
 
-  // }
+  
+  destroy() {
+    // clear the timeout
+    clearTimeout(this.timeout);
+    // remove from the screen
+  }
+  
+  // gif cycler
 
+  setGifOnScreen(gifUrl) {
+    $(this.screen).css({
+      background: `url(${gifUrl})`
+    });
+    this.timeout = setTimeout(() => {
+      const newGifUrl = CABINETS[0].exchangeForRandomGifUrl(gifUrl);
+      this.setGifOnScreen(newGifUrl);
+    }, Math.random() * 3000 + 1800);
+  }
+
+  // Gif Library helpers
   getRandomGifUrl() {
     const randomIndex = Math.floor(Math.random() * this.library.length);
     const randomGifUrl = this.library[randomIndex];
@@ -112,6 +144,10 @@ class Cabinet {
   }
 }
 
+// ----------------------------------------------------------------
+//  Cabinets
+// ----------------------------------------------------------------
+
 const gifLibrary = new Cabinet('all', [
   ...GIF_URL_LIBRARIES.celesteAndTowerfall,
   ...GIF_URL_LIBRARIES.cyberpunk,
@@ -123,23 +159,17 @@ const gifLibrary = new Cabinet('all', [
   ...GIF_URL_LIBRARIES.stray,
 ]);
 
-function setGifOnScreen(screen, gifUrl) {
-  $(screen).css({
-    background: `url(${gifUrl})`
-  });
-  setTimeoutForScreen(screen, gifUrl);
-}
+const CABINETS = [
+  new Cabinet('Cyberpunk 2077', GIF_URL_LIBRARIES.cyberpunk, ['#f7ec13', '#56beca'])
+];
 
-function setTimeoutForScreen(screen, gifUrl) {
-  setTimeout(() => {
-    const newGifUrl = gifLibrary.exchangeForRandomGifUrl(gifUrl);
-    setGifOnScreen(screen, newGifUrl);
-  }, Math.random() * 3000 + 1800);
-}
+// ----------------------------------------------------------------
+//  MAIN
+// ----------------------------------------------------------------
 
 (function() {
-  $('.screen').each(function() {
-    setGifOnScreen(this, gifLibrary.getRandomGifUrl());
-  })
+  CABINETS[0].render($('#first-cabinet'));
+  // TODO: use this to add a new cabinet, at the start, add 7 cabinets that'll get scrolled
+  $('.cabinets').append($('#first-cabinet').clone());
 })();
 

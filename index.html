@@ -12,10 +12,12 @@
   <body>
     <div class="title">Flanny's Arcade</div>
     <div class="cabinets">
-      <div class="cabinet-holder">
+      <div class="cabinet-holder" id="first-cabinet">
         <div class="cabinet">
-          <div class="logo-holder" style="background: #afec2c">
-            <!-- TODO: make a custom logo -->
+          <div class="logo-holder" style="background: #f7ec13">
+            <div class="logo">
+              Cyberpunk 2077
+            </div>
           </div>
           <div class="screen-holder">
             <!-- 
@@ -30,18 +32,24 @@
           </div>
           <div class="button-row-holder">
             <div class="joystick-base">
-              <div class="stick" style="animation-delay: 0.6s;"></div>
+              <div class="stick" style="animation-delay: 0.6s;">
+                <div class="ball" style="background:#56beca;"></div>
+              </div>
             </div>
-            <div class="button button-1" style="animation-delay: 0.17s;"></div>
-            <div class="button button-2" style="animation-delay: 0.06s;"></div>
+            <div class="button button-1">
+              <div class="button-color" style="background:#56beca;animation-delay: 0.17s;animation-duration: 0.65s;"></div>
+            </div>
+            <div class="button button-2">
+              <div class="button-color" style="background:#56beca;animation-delay: 0.06s;animation-duration: 0.62s;"></div>
+            </div>
             <div class="button-row-edge">
-              <div class="button-row-face" style="background: #91f755"></div>
+              <div class="button-row-face" style="background: #f7ec13"></div>
             </div>
           </div>
           <div class="legs"></div>
         </div>
       </div>
-      <div class="cabinet-holder">
+      <!-- <div class="cabinet-holder">
         <div class="cabinet">
           <div class="logo-holder" style="background: #ac1689">
           </div>
@@ -88,7 +96,7 @@
           </div>
           <div class="legs"></div>
         </div>
-      </div>
+      </div> -->
     </div>
   </body>
   <script src="./main.js"></script>
